@@ -1,16 +1,21 @@
-# This is a sample Python script.
+import requests
 
-# Press Ctrl+F5 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+api = "1d0bda63cd0b42919489ac78c98ba423"
+
+url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=1d0bda63cd0b42919489ac78c98ba423"
+
+#make a request
+request = requests.get(url)
+
+#Get a dictionary with data
+content = request.json()        #content = request.txt use json() for more readable format
+
+#Access the article titles and authors
+
+for article in content["articles"]:
+    print(article["author"])
+    print(article["title"])
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press F9 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print(type(content))
+#print(content["articles"])     #use debugger to see the details of the data structure
