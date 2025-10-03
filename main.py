@@ -4,14 +4,16 @@ import smtplib, ssl
 
 api = "1d0bda63cd0b42919489ac78c98ba423"
 
-topic = "tesla"
+#topic = "tesla"
 
-url = "https://newsapi.org/v2/everything?" \
-      f"q={topic}&" \
-      "from=2025-08-29&" \
-      "sortBy=publishedAt&" \
-      "apiKey=1d0bda63cd0b42919489ac78c98ba423&" \
-      "language=en"    #go to api url properties and under api documents find endpoints
+#url = "https://newsapi.org/v2/everything?" \
+     # f"q={topic}&" \
+      #"from=2025-08-29&" \
+     # "sortBy=publishedAt&" \
+     # "apiKey=1d0bda63cd0b42919489ac78c98ba423&" \
+     # "language=en"    #go to api url properties and under api documents find endpoints
+
+url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=1d0bda63cd0b42919489ac78c98ba423"
 
 #make a request
 request = requests.get(url)
@@ -22,7 +24,7 @@ content = request.json()        #content = request.txt use json() for more reada
 #Access the article titles and authors
 body = ""
 for article in content["articles"][:4]:
-    if article["title"] is not None:
+    if article["title"] and article["description"] and article["url"] is not None:
         body = "Subject: Todays news" + "\n" \
                + body + article["title"] + "\n" \
                + article["description"] + "\n" \
